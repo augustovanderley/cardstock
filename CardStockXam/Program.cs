@@ -4,6 +4,7 @@ using Players;
 using System.IO;
 using System.Threading;
 using CardStockXam.Scoring;
+using System.Diagnostics;
 
 namespace CardGames
 {
@@ -13,10 +14,13 @@ namespace CardGames
     {
         public static void Main(string[] args)
         {
-            CardStockXam.Scorer.Main(args);
-            //var p = new Program();
-            //p.SingleGame("games/Caterpillar.gdl");
-            // p.AllGames();
+            //CardStockXam.Scorer.Main(args);
+            var p = new Program();
+            Dice d = new Dice(6);
+            Debug.WriteLine(d.throwDice());
+            p.SingleGame("games/teste.gdl");
+
+            //p.AllGames();
 
 
         }
@@ -31,7 +35,7 @@ namespace CardGames
 			exp.numEpochs = 1;
 
             exp.logging = true;
-            exp.type = GameType.AllAI;
+            exp.type = GameType.AllRnd;
 
 			var codeGen = new ParseEngine(exp);
             codeGen.setWorld(new World());

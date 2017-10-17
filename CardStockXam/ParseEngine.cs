@@ -59,7 +59,7 @@ public class ParseEngine
             }
             fileName = path[1] + ".gdl";
         }*/
-        Console.WriteLine("name: " + fileName);
+        Debug.WriteLine("name: " + fileName);
         var file = File.ReadAllText(fileName);
         file = regex.Replace(file, "\n");
 
@@ -79,10 +79,10 @@ public class ParseEngine
         /***********
          * Make the parse tree visualization
          ***********/
-        if (!exp.evaluating)
+        /*if (!exp.evaluating)
         {
             DOTMakerTop(tree, exp.fileName);
-        }
+        }*/
 
         return HasShuffleAndChoice(tree);
 
