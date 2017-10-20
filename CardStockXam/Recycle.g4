@@ -3,7 +3,7 @@
 grammar Recycle;
 var : '\'' namegr ;
 game : OPEN 'game' declare*? setup (multiaction | stage)+? scoring CLOSE ;
-setup : OPEN 'setup' playercreate OPEN teamcreate CLOSE (OPEN (deckcreate | repeat) CLOSE)+? CLOSE ;
+setup : OPEN 'setup' playercreate OPEN teamcreate CLOSE (OPEN (deckcreate | repeat | dicecreate) CLOSE)+? CLOSE ;
 stage : OPEN 'stage' ('player' | 'team') endcondition (multiaction | stage)+? CLOSE ;
 scoring : OPEN 'scoring' ('min' | 'max') int CLOSE ;
 endcondition : OPEN 'end' boolean CLOSE ;
@@ -21,6 +21,7 @@ declare : OPEN 'declare' typed var CLOSE ;
 playercreate : OPEN 'create' 'players' (var | int) CLOSE ;
 teamcreate : 'create' 'teams' teams+? ;
 deckcreate : 'create' 'deck' cstorage deck ;
+dicecreate: 'create' 'dice' INTNUM;
 deck : OPEN 'deck' attribute+? CLOSE ;
 teams : OPEN (INTNUM ',')*? INTNUM teams*? CLOSE ;
 attribute : OPEN var CLOSE | OPEN (namegr ',')*? namegr attribute*? CLOSE ;

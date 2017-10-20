@@ -189,6 +189,16 @@ public interface IRecycleListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitDeckcreate([NotNull] RecycleParser.DeckcreateContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="RecycleParser.dicecreate"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDicecreate([NotNull] RecycleParser.DicecreateContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="RecycleParser.dicecreate"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDicecreate([NotNull] RecycleParser.DicecreateContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="RecycleParser.deck"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

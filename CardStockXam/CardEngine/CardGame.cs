@@ -11,22 +11,23 @@ using System.Diagnostics;
 
 namespace CardEngine
 {
-	
-	public class CardGame{
 
-		public string DeclaredName = "Default";
-		public static Random rand = new Random();
-		public List<Card> sourceDeck = new List<Card>();
-		public CardStorage tableCards = new CardStorage();
-		
-		public List<Player> players = new List<Player>();
-		public List<GeneralPlayer> decisionPlayers = new List<GeneralPlayer> ();
-		public List<Team> teams = new List<Team>();
-		public Stack<StageCycle<Player>> currentPlayer = new Stack<StageCycle<Player>>();
-		public Stack<StageCycle<Team>> currentTeam = new Stack<StageCycle<Team>>();
-		public RawStorage gameStorage = new RawStorage();
-		public PointsStorage points = new PointsStorage();
+    public class CardGame {
+
+        public string DeclaredName = "Default";
+        public static Random rand = new Random();
+        public List<Card> sourceDeck = new List<Card>();
+        public CardStorage tableCards = new CardStorage();
+
+        public List<Player> players = new List<Player>();
+        public List<GeneralPlayer> decisionPlayers = new List<GeneralPlayer>();
+        public List<Team> teams = new List<Team>();
+        public Stack<StageCycle<Player>> currentPlayer = new Stack<StageCycle<Player>>();
+        public Stack<StageCycle<Team>> currentTeam = new Stack<StageCycle<Team>>();
+        public RawStorage gameStorage = new RawStorage();
+        public PointsStorage points = new PointsStorage();
         public Dictionary<String, object> vars = new Dictionary<string, object>();
+        public List<Dice> dice = new List<Dice>();
 
         public bool logging;
         public string fileName;

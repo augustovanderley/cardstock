@@ -1095,7 +1095,17 @@ namespace ParseTreeIterator
                     }
                 }
             }
-			return ret;
+            if (setupNode.dicecreate() != null)
+            {
+                Debug.WriteLine("Creating dices.");
+                var dices = setupNode.dicecreate();
+                foreach (var diceinit in dices)
+                {
+                    Debug.WriteLine("Creating each dice.");
+                    ret.Add(ProcessDice(diceinit));
+                }
+            }
+            return ret;
 		}
 
         public  bool CheckDeckRepeat(RecycleParser.RepeatContext reps){
@@ -1114,7 +1124,14 @@ namespace ParseTreeIterator
             var deckTree = ProcessDeck(deckinit.deck());
             return new InitializeAction(locstorage.cardList, deckTree, parent.instance);
         }
-                
+        public GameAction ProcessDice(RecycleParser.DicecreateContext diceinit)
+        {
+            var locstorage = ProcessLocation(diceinit.cstorage());
+            var deckTree = ProcessDeck(diceinit.deck());
+            return new InitializeAction(locstorage.cardList, deckTree, parent.instance);
+        }
+
+
         public  List<GameActionCollection> ProcessMultiaction(IParseTree sub)
         {
             var lst = new List<GameActionCollection>();

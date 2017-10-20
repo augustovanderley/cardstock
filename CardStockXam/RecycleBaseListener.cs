@@ -225,6 +225,18 @@ public partial class RecycleBaseListener : IRecycleListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitDeckcreate([NotNull] RecycleParser.DeckcreateContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="RecycleParser.dicecreate"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDicecreate([NotNull] RecycleParser.DicecreateContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="RecycleParser.dicecreate"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDicecreate([NotNull] RecycleParser.DicecreateContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="RecycleParser.deck"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
