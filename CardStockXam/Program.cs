@@ -16,8 +16,7 @@ namespace CardGames
         {
             //CardStockXam.Scorer.Main(args);
             var p = new Program();
-            Dice d = new Dice(6);
-            Debug.WriteLine(d.throwDice());
+            
             p.SingleGame("games/teste.gdl");
 
             //p.AllGames();
