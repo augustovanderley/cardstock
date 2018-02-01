@@ -79,10 +79,10 @@ public class ParseEngine
         /***********
          * Make the parse tree visualization
          ***********/
-        /*if (!exp.evaluating)
+        if (!exp.evaluating)
         {
             DOTMakerTop(tree, exp.fileName);
-        }*/
+        }
 
         return HasShuffleAndChoice(tree);
 
@@ -311,7 +311,8 @@ public class ParseEngine
 		builder.Append("}");
 		try
 		{
-			var fs = File.Create("games/" + fileName + ".gv");
+            fileName = fileName.Replace(".gdl", "");
+			var fs = File.Create( fileName + ".gv");
 			var bytes = Encoding.UTF8.GetBytes(builder.ToString());
 			fs.Write(bytes, 0, bytes.Length);
 			fs.Close();
