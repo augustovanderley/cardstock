@@ -27,7 +27,7 @@ namespace CardEngine
         public RawStorage gameStorage = new RawStorage();
         public PointsStorage points = new PointsStorage();
         public Dictionary<String, object> vars = new Dictionary<string, object>();
-        public List<Dice> dice = new List<Dice>();
+        public List<Dice> dices = new List<Dice>();
 
         public bool logging;
         public string fileName;

@@ -199,6 +199,16 @@ public interface IRecycleListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitDicecreate([NotNull] RecycleParser.DicecreateContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="RecycleParser.dice"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDice([NotNull] RecycleParser.DiceContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="RecycleParser.dice"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDice([NotNull] RecycleParser.DiceContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="RecycleParser.deck"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -358,6 +368,16 @@ public interface IRecycleListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitRepeat([NotNull] RecycleParser.RepeatContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="RecycleParser.throwdice"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterThrowdice([NotNull] RecycleParser.ThrowdiceContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="RecycleParser.throwdice"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitThrowdice([NotNull] RecycleParser.ThrowdiceContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="RecycleParser.card"/>.
 	/// </summary>

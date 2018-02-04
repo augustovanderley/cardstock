@@ -237,6 +237,18 @@ public partial class RecycleBaseListener : IRecycleListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitDicecreate([NotNull] RecycleParser.DicecreateContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="RecycleParser.dice"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDice([NotNull] RecycleParser.DiceContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="RecycleParser.dice"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDice([NotNull] RecycleParser.DiceContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="RecycleParser.deck"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -428,6 +440,18 @@ public partial class RecycleBaseListener : IRecycleListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitRepeat([NotNull] RecycleParser.RepeatContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="RecycleParser.throwdice"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterThrowdice([NotNull] RecycleParser.ThrowdiceContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="RecycleParser.throwdice"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitThrowdice([NotNull] RecycleParser.ThrowdiceContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="RecycleParser.card"/>.
 	/// <para>The default implementation does nothing.</para>

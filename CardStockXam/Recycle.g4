@@ -9,10 +9,18 @@ scoring : OPEN 'scoring' ('min' | 'max') int CLOSE ;
 endcondition : OPEN 'end' boolean CLOSE ;
 
 action : OPEN (initpoints | teamcreate | deckcreate | cycleaction | setaction | moveaction | copyaction
-         | incaction | decaction | removeaction | turnaction | shuffleaction | repeat) CLOSE | agg ;
-multiaction : OPEN 'choice' OPEN (condact)+? CLOSE CLOSE | OPEN 'do' OPEN (condact)+? CLOSE CLOSE | agg | let ;
+         | incaction | decaction | removeaction | turnaction | shuffleaction | repeat | throwdice) CLOSE | agg ;
+
+multiaction : OPEN 'choice' OPEN (condact)+? CLOSE CLOSE | 
+			  OPEN 'do' OPEN (condact)+? CLOSE CLOSE | 
+			  agg | 
+			  let ;
 multiaction2 : OPEN 'do' OPEN (condact)+? CLOSE CLOSE | agg | let ;
-condact : OPEN boolean multiaction2 CLOSE | multiaction2 | OPEN boolean action CLOSE | action ;
+
+condact : OPEN boolean multiaction2 CLOSE | 
+multiaction2 | 
+OPEN boolean action CLOSE | 
+action ;
 
 agg : OPEN ('any' | 'all') collection var (condact | boolean | cstorage | rawstorage) CLOSE ;
 let : OPEN 'let' typed var (multiaction | action | condact) CLOSE ;
@@ -21,7 +29,8 @@ declare : OPEN 'declare' typed var CLOSE ;
 playercreate : OPEN 'create' 'players' (var | int) CLOSE ;
 teamcreate : 'create' 'teams' teams+? ;
 deckcreate : 'create' 'deck' cstorage deck ;
-dicecreate: 'create' 'dice' int;
+dicecreate: 'create' 'dice' dice+ ;
+dice: OPEN (int) CLOSE ;
 deck : OPEN 'deck' attribute+? CLOSE ;
 teams : OPEN (INTNUM ',')*? INTNUM teams*? CLOSE ;
 attribute : OPEN var CLOSE | OPEN (namegr ',')*? namegr attribute*? CLOSE ;
@@ -42,6 +51,7 @@ removeaction : 'forget' card ;
 shuffleaction : 'shuffle' cstorage ;
 turnaction : 'turn' 'pass' ;
 repeat : 'repeat' int action | 'repeat' 'all' OPEN moveaction CLOSE ;
+throwdice : 'throwdice'; 
 
 card : var | maxof | minof | actual | OPEN ('top' | 'bottom' | int) cstorage CLOSE ;
 actual : OPEN 'actual' card CLOSE ;

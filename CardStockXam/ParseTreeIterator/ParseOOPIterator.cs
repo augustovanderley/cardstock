@@ -23,36 +23,43 @@ namespace ParseTreeIterator
 		public GameActionCollection ProcessAction(RecycleParser.ActionContext actionNode){
             Debug.WriteLine(actionNode.GetText()); 
 			var ret = new GameActionCollection();
-            if (actionNode.teamcreate() != null) {
+            if (actionNode.teamcreate() != null)
+            {
                 var teamCreate = actionNode.teamcreate() as RecycleParser.TeamcreateContext;
                 ret.Add(new TeamCreateAction(teamCreate, parent.instance));
             }
-            else if (actionNode.initpoints() != null) {
+            else if (actionNode.initpoints() != null)
+            {
                 var points = actionNode.initpoints();
                 var name = points.var().GetText();
-                if (!parent.instance.points.binDict.ContainsKey(name)) {
+                if (!parent.instance.points.binDict.ContainsKey(name))
+                {
                     parent.instance.points.AddKey(name);
                 }
                 List<PointAwards> temp = new List<PointAwards>();
                 var awards = points.awards();
-                foreach (RecycleParser.AwardsContext award in awards) {
+                foreach (RecycleParser.AwardsContext award in awards)
+                {
                     string key = "";
                     string value = "";
                     int reward = ProcessInt(award.@int());
                     var iter = award.subaward();
-                    foreach (RecycleParser.SubawardContext i in iter) {
+                    foreach (RecycleParser.SubawardContext i in iter)
+                    {
                         // TODO Is this working properly? I don't think so!
                         key += i.namegr()[0].GetText() + ",";
-                        if (i.namegr().Length > 1) {
-							Debug.WriteLine("*** Found a namegr...)" + i.namegr()[1].GetText());
+                        if (i.namegr().Length > 1)
+                        {
+                            Debug.WriteLine("*** Found a namegr...)" + i.namegr()[1].GetText());
 
-							value += i.namegr()[1].GetText() + ",";
+                            value += i.namegr()[1].GetText() + ",";
                         }
-                        else {
+                        else
+                        {
                             Debug.WriteLine("*** Card Att parsing...)");
                             value += ProcessCardatt(i.cardatt()) + ",";
                         }
-                 
+
                     }
                     key = key.Substring(0, key.Length - 1);
                     value = value.Substring(0, value.Length - 1);
@@ -61,54 +68,69 @@ namespace ParseTreeIterator
                 }
                 parent.instance.points[name] = new CardScore(temp);
             }
-            else if (actionNode.copyaction() != null) {
+            else if (actionNode.copyaction() != null)
+            {
                 Debug.WriteLine("REMEMBER: '" + actionNode.GetText() + "'");
                 var copy = ProcessCopy(actionNode.copyaction());
                 if (copy != null) { ret.Add(copy); }
                 else { Debug.WriteLine("copying from empty, " + actionNode.copyaction().GetText()); }
             }
-            else if (actionNode.removeaction() != null) {
+            else if (actionNode.removeaction() != null)
+            {
                 Debug.WriteLine("FORGET: '" + actionNode.GetText() + "'");
                 var removeAction = actionNode.removeaction();
                 ret.Add(ProcessRemove(removeAction));
             }
-            else if (actionNode.moveaction() != null) {
+            else if (actionNode.moveaction() != null)
+            {
                 Debug.WriteLine("MOVE: '" + actionNode.GetText() + "'");
                 var move = actionNode.moveaction();
                 ret.Add(ProcessMove(move));
             }
-            else if (actionNode.shuffleaction() != null) {
+            else if (actionNode.shuffleaction() != null)
+            {
                 var locations = ProcessLocation(actionNode.shuffleaction().cstorage());
                 ret.Add(ProcessShuffle(locations));
             }
-            else if (actionNode.setaction() != null) {
+            else if (actionNode.setaction() != null)
+            {
                 var setAction = actionNode.setaction();
                 ret.Add(SetAction(setAction));
             }
-            else if (actionNode.incaction() != null) {
+            else if (actionNode.incaction() != null)
+            {
                 var incAction = actionNode.incaction();
                 ret.Add(IncAction(incAction));
             }
-            else if (actionNode.decaction() != null) {
+            else if (actionNode.decaction() != null)
+            {
                 var decAction = actionNode.decaction();
                 ret.Add(DecAction(decAction));
             }
-            else if (actionNode.cycleaction() != null) {
+            else if (actionNode.cycleaction() != null)
+            {
                 ret.Add(CycleAction(actionNode.cycleaction()));
             }
-            else if (actionNode.deckcreate() != null) {
+            else if (actionNode.deckcreate() != null)
+            {
                 ret.Add(ProcessDeck(actionNode.deckcreate()));
             }
-            else if (actionNode.turnaction() != null) {
+            else if (actionNode.turnaction() != null)
+            {
                 ret.Add(new TurnAction());
             }
-            else if (actionNode.repeat() != null) {
+            else if (actionNode.repeat() != null)
+            {
                 ret.AddRange(ProcessRepeat(actionNode.repeat()));
-			}
-			else{
-				Debug.WriteLine("Not Processed: '" + actionNode.GetText() + "'");
+            }
+            else if (actionNode.throwdice() != null) {
+                Debug.WriteLine("Throwing dice of size : " + parent.instance.dices.First().sides +  ", value:  " + parent.instance.dices.First().ThrowDice());
+            }
+            else
+            {
+                Debug.WriteLine("Not Processed: '" + actionNode.GetText() + "'");
                 throw new NotImplementedException();
-			}
+            }
 			return ret;
 		}
 
@@ -1054,8 +1076,9 @@ namespace ParseTreeIterator
             Debug.WriteLine("NUMTEAMS:" + parent.instance.teams.Count);
 
         }
+ 
 
-		public  GameActionCollection ProcessSetup(RecycleParser.SetupContext setupNode){
+        public  GameActionCollection ProcessSetup(RecycleParser.SetupContext setupNode){
 			var ret = new GameActionCollection();
 			if (setupNode.playercreate() != null){
                 Debug.WriteLine("Creating players.");
@@ -1099,16 +1122,49 @@ namespace ParseTreeIterator
             {
                 Debug.WriteLine("Creating dices.");
                 var dices = setupNode.dicecreate();
-                
                 foreach (var diceinit in dices)
                 {
-                    Debug.WriteLine("Creating each dice.");
-                    var diceSize = ProcessInt(diceinit.@int());
-                    
+                    ProcessDice(diceinit);
                 }
+                    /*var numDices = dice().Count();
+                    //diceinit.getAltNumber();
+
+                    var numDices = diceCreate.dice().Count();
+                    for (int i = 0; i < numDices; ++i)
+                    {
+                        var Dice = new Dice(i, parent.instance);
+                        var teamStr = "T:";
+                        diceCreate.dice(i).INTNUM();
+                        foreach (var p in teamCreate.teams(i).INTNUM())
+                        {
+                            var j = Int32.Parse(p.GetText());
+                            newTeam.teamPlayers.Add(parent.instance.players[j]);
+                            parent.instance.players[j].team = newTeam;
+                            teamStr += j + " ";
+                        }
+                        parent.instance.teams.Add(newTeam);
+                        parent.instance.WriteToFile(teamStr);
+                    }
+
+                    parent.instance.currentTeam.Push(new StageCycle<Team>(parent.instance.teams, parent.instance));
+                    Debug.WriteLine("NUMTEAMS:" + parent.instance.teams.Count);
+                    Debug.WriteLine("Creating dice.");
+
+                }*/
             }
             return ret;
 		}
+
+        private void ProcessDice(RecycleParser.DicecreateContext diceinit)
+        {
+            var numDices = diceinit.dice().Count();
+            foreach (var dice in diceinit.dice()) {
+                var createdDice = new Dice(ProcessInt(dice.@int()));
+                Debug.WriteLine("Creating dice with size: " + createdDice.ToString());
+                parent.instance.dices.Add(createdDice);
+            }
+            
+        }
 
         public  bool CheckDeckRepeat(RecycleParser.RepeatContext reps){
             if (reps.action().deckcreate() != null){

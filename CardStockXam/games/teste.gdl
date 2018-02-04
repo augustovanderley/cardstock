@@ -7,7 +7,7 @@
       (create teams (0) (1) (2) (3))
       
       ;; Create the deck source
-	  (create dice 6)
+	  (create dice (6) (7) )
      
       (create deck (game iloc STOCK) (deck (RANK (THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN))
                                           (COLOR (RED (SUIT (HEARTS, DIAMONDS)))
@@ -22,6 +22,7 @@
          (all player 'P 
               (repeat 1 (move (top (game iloc STOCK))
                               (top ('P iloc HAND)))))
+		(throwdice)
    
       ))
          

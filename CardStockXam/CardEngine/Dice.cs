@@ -5,7 +5,7 @@ using System.Diagnostics;
 namespace CardEngine{
 	public class Dice{
 
-        private int sides;
+        public int sides;
 
 		public Dice(int sides){
             this.sides = sides;
@@ -13,9 +13,15 @@ namespace CardEngine{
 
         public int Sides { get => sides; set => sides = value; }
 
-        public int throwDice() {
+        public int ThrowDice() {
             Random r = new Random();
             return r.Next(1, sides+1);
         }
+
+
+        public override String ToString() {
+            return sides.ToString();
+        }
+        
     }
 }
