@@ -123,8 +123,9 @@ namespace ParseTreeIterator
             {
                 ret.AddRange(ProcessRepeat(actionNode.repeat()));
             }
-            else if (actionNode.throwdice() != null) {
-                Debug.WriteLine("Throwing dice of size : " + parent.instance.dices.First().sides +  ", value:  " + parent.instance.dices.First().ThrowDice());
+            else if (actionNode.throwalldices() != null) {
+                
+                Debug.WriteLine("Throwing dices of value:  " + parent.instance.ThrowAllDices());
             }
             else
             {

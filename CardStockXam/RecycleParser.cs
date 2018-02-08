@@ -50,7 +50,7 @@ public partial class RecycleParser : Parser {
 		RULE_awards = 22, RULE_subaward = 23, RULE_cycleaction = 24, RULE_setaction = 25, 
 		RULE_incaction = 26, RULE_decaction = 27, RULE_moveaction = 28, RULE_copyaction = 29, 
 		RULE_removeaction = 30, RULE_shuffleaction = 31, RULE_turnaction = 32, 
-		RULE_repeat = 33, RULE_throwdice = 34, RULE_card = 35, RULE_actual = 36, 
+		RULE_repeat = 33, RULE_throwalldices = 34, RULE_card = 35, RULE_actual = 36, 
 		RULE_rawstorage = 37, RULE_cstorage = 38, RULE_memstorage = 39, RULE_memset = 40, 
 		RULE_tuple = 41, RULE_locpre = 42, RULE_locdesc = 43, RULE_who = 44, RULE_whop = 45, 
 		RULE_whot = 46, RULE_whodesc = 47, RULE_owner = 48, RULE_teamp = 49, RULE_other = 50, 
@@ -65,12 +65,12 @@ public partial class RecycleParser : Parser {
 		"teamcreate", "deckcreate", "dicecreate", "dice", "deck", "teams", "attribute", 
 		"initpoints", "awards", "subaward", "cycleaction", "setaction", "incaction", 
 		"decaction", "moveaction", "copyaction", "removeaction", "shuffleaction", 
-		"turnaction", "repeat", "throwdice", "card", "actual", "rawstorage", "cstorage", 
-		"memstorage", "memset", "tuple", "locpre", "locdesc", "who", "whop", "whot", 
-		"whodesc", "owner", "teamp", "other", "typed", "collection", "strcollection", 
-		"cstoragecollection", "range", "filter", "attrcomp", "cardatt", "boolean", 
-		"intop", "add", "mult", "subtract", "mod", "divide", "sizeof", "maxof", 
-		"minof", "unionof", "sum", "score", "int", "namegr"
+		"turnaction", "repeat", "throwalldices", "card", "actual", "rawstorage", 
+		"cstorage", "memstorage", "memset", "tuple", "locpre", "locdesc", "who", 
+		"whop", "whot", "whodesc", "owner", "teamp", "other", "typed", "collection", 
+		"strcollection", "cstoragecollection", "range", "filter", "attrcomp", 
+		"cardatt", "boolean", "intop", "add", "mult", "subtract", "mod", "divide", 
+		"sizeof", "maxof", "minof", "unionof", "sum", "score", "int", "namegr"
 	};
 
 	private static readonly string[] _LiteralNames = {
@@ -79,7 +79,7 @@ public partial class RecycleParser : Parser {
 		"'declare'", "'create'", "'players'", "'teams'", "'deck'", "'dice'", "','", 
 		"'put'", "'points'", "'cycle'", "'next'", "'current'", "'previous'", "'set'", 
 		"'inc'", "'dec'", "'move'", "'remember'", "'forget'", "'shuffle'", "'turn'", 
-		"'pass'", "'repeat'", "'throwdice'", "'top'", "'bottom'", "'actual'", 
+		"'pass'", "'repeat'", "'throwalldices'", "'top'", "'bottom'", "'actual'", 
 		"'sto'", "'tuples'", "'using'", "'vloc'", "'iloc'", "'hloc'", "'mem'", 
 		"'owner'", "'other'", "'range'", "'..'", "'filter'", "'cardatt'", "'+'", 
 		"'*'", "'-'", "'%'", "'//'", "'size'", "'union'", "'sum'", "'score'", 
@@ -620,8 +620,8 @@ public partial class RecycleParser : Parser {
 		public RepeatContext repeat() {
 			return GetRuleContext<RepeatContext>(0);
 		}
-		public ThrowdiceContext throwdice() {
-			return GetRuleContext<ThrowdiceContext>(0);
+		public ThrowalldicesContext throwalldices() {
+			return GetRuleContext<ThrowalldicesContext>(0);
 		}
 		public AggContext agg() {
 			return GetRuleContext<AggContext>(0);
@@ -721,7 +721,7 @@ public partial class RecycleParser : Parser {
 					break;
 				case 14:
 					{
-					State = 226; throwdice();
+					State = 226; throwalldices();
 					}
 					break;
 				}
@@ -2489,26 +2489,26 @@ public partial class RecycleParser : Parser {
 		return _localctx;
 	}
 
-	public partial class ThrowdiceContext : ParserRuleContext {
-		public ThrowdiceContext(ParserRuleContext parent, int invokingState)
+	public partial class ThrowalldicesContext : ParserRuleContext {
+		public ThrowalldicesContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_throwdice; } }
+		public override int RuleIndex { get { return RULE_throwalldices; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			IRecycleListener typedListener = listener as IRecycleListener;
-			if (typedListener != null) typedListener.EnterThrowdice(this);
+			if (typedListener != null) typedListener.EnterThrowalldices(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IRecycleListener typedListener = listener as IRecycleListener;
-			if (typedListener != null) typedListener.ExitThrowdice(this);
+			if (typedListener != null) typedListener.ExitThrowalldices(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public ThrowdiceContext throwdice() {
-		ThrowdiceContext _localctx = new ThrowdiceContext(Context, State);
-		EnterRule(_localctx, 68, RULE_throwdice);
+	public ThrowalldicesContext throwalldices() {
+		ThrowalldicesContext _localctx = new ThrowalldicesContext(Context, State);
+		EnterRule(_localctx, 68, RULE_throwalldices);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{

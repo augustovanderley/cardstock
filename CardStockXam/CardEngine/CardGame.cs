@@ -199,7 +199,17 @@ namespace CardEngine
 
 			return temp;
 		}
-		public CardGame Clone(){
+
+        public int ThrowAllDices()
+        {
+            int sumDices = 0; 
+            foreach (var dice in dices) {
+                sumDices += dice.ThrowDice();
+            }
+            return sumDices;
+        }
+
+        public CardGame Clone(){
 			var temp = CloneCommon ();
 			//Clone Source Deck and Index Cards
 			//*****************

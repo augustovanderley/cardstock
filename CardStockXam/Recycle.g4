@@ -9,7 +9,7 @@ scoring : OPEN 'scoring' ('min' | 'max') int CLOSE ;
 endcondition : OPEN 'end' boolean CLOSE ;
 
 action : OPEN (initpoints | teamcreate | deckcreate | cycleaction | setaction | moveaction | copyaction
-         | incaction | decaction | removeaction | turnaction | shuffleaction | repeat | throwdice) CLOSE | agg ;
+         | incaction | decaction | removeaction | turnaction | shuffleaction | repeat | throwalldices) CLOSE | agg ;
 
 multiaction : OPEN 'choice' OPEN (condact)+? CLOSE CLOSE | 
 			  OPEN 'do' OPEN (condact)+? CLOSE CLOSE | 
@@ -51,7 +51,7 @@ removeaction : 'forget' card ;
 shuffleaction : 'shuffle' cstorage ;
 turnaction : 'turn' 'pass' ;
 repeat : 'repeat' int action | 'repeat' 'all' OPEN moveaction CLOSE ;
-throwdice : 'throwdice'; 
+throwalldices : 'throwalldices'; 
 
 card : var | maxof | minof | actual | OPEN ('top' | 'bottom' | int) cstorage CLOSE ;
 actual : OPEN 'actual' card CLOSE ;

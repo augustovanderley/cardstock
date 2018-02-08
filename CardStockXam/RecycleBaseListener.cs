@@ -441,17 +441,17 @@ public partial class RecycleBaseListener : IRecycleListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitRepeat([NotNull] RecycleParser.RepeatContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="RecycleParser.throwdice"/>.
+	/// Enter a parse tree produced by <see cref="RecycleParser.throwalldices"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterThrowdice([NotNull] RecycleParser.ThrowdiceContext context) { }
+	public virtual void EnterThrowalldices([NotNull] RecycleParser.ThrowalldicesContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="RecycleParser.throwdice"/>.
+	/// Exit a parse tree produced by <see cref="RecycleParser.throwalldices"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitThrowdice([NotNull] RecycleParser.ThrowdiceContext context) { }
+	public virtual void ExitThrowalldices([NotNull] RecycleParser.ThrowalldicesContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="RecycleParser.card"/>.
 	/// <para>The default implementation does nothing.</para>

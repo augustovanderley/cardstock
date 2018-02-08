@@ -20,9 +20,9 @@
       (do (
          (shuffle (game iloc STOCK))
          (all player 'P 
-              (repeat 1 (move (top (game iloc STOCK))
+              (repeat 7 (move (top (game iloc STOCK))
                               (top ('P iloc HAND)))))
-		(throwdice)
+		(throwalldices)
    
       ))
          

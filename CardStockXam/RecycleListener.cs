@@ -369,15 +369,15 @@ public interface IRecycleListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitRepeat([NotNull] RecycleParser.RepeatContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="RecycleParser.throwdice"/>.
+	/// Enter a parse tree produced by <see cref="RecycleParser.throwalldices"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterThrowdice([NotNull] RecycleParser.ThrowdiceContext context);
+	void EnterThrowalldices([NotNull] RecycleParser.ThrowalldicesContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="RecycleParser.throwdice"/>.
+	/// Exit a parse tree produced by <see cref="RecycleParser.throwalldices"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitThrowdice([NotNull] RecycleParser.ThrowdiceContext context);
+	void ExitThrowalldices([NotNull] RecycleParser.ThrowalldicesContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="RecycleParser.card"/>.
 	/// </summary>
