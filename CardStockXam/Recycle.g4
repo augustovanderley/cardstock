@@ -29,7 +29,7 @@ declare : OPEN 'declare' typed var CLOSE ;
 playercreate : OPEN 'create' 'players' (var | int) CLOSE ;
 teamcreate : 'create' 'teams' teams+? ;
 deckcreate : 'create' 'deck' cstorage deck ;
-dicecreate: 'create' 'dice' dice+ ;
+dicecreate: 'create' 'dicestorage' dice+ ;
 dice: OPEN (int) CLOSE ;
 deck : OPEN 'deck' attribute+? CLOSE ;
 teams : OPEN (INTNUM ',')*? INTNUM teams*? CLOSE ;

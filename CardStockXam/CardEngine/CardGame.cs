@@ -27,7 +27,7 @@ namespace CardEngine
         public RawStorage gameStorage = new RawStorage();
         public PointsStorage points = new PointsStorage();
         public Dictionary<String, object> vars = new Dictionary<string, object>();
-        public List<Dice> dices = new List<Dice>();
+        public List<DiceStorage> dicesStorages = new List<DiceStorage>();
 
         public bool logging;
         public string fileName;
@@ -200,14 +200,7 @@ namespace CardEngine
 			return temp;
 		}
 
-        public int ThrowAllDices()
-        {
-            int sumDices = 0; 
-            foreach (var dice in dices) {
-                sumDices += dice.ThrowDice();
-            }
-            return sumDices;
-        }
+
 
         public CardGame Clone(){
 			var temp = CloneCommon ();

@@ -124,8 +124,8 @@ namespace ParseTreeIterator
                 ret.AddRange(ProcessRepeat(actionNode.repeat()));
             }
             else if (actionNode.throwalldices() != null) {
-                
-                Debug.WriteLine("Throwing dices of value:  " + parent.instance.ThrowAllDices());
+                parent.instance.dicesStorages.First().ThrowAllDices();
+                Debug.WriteLine("Throwing dices of value:  " + parent.instance.dicesStorages.First().sumValueAllDices);
             }
             else
             {
@@ -1123,46 +1123,22 @@ namespace ParseTreeIterator
             {
                 Debug.WriteLine("Creating dices.");
                 var dices = setupNode.dicecreate();
-                foreach (var diceinit in dices)
+                foreach (var diceStorage in dices)
                 {
-                    ProcessDice(diceinit);
+                    ProcessDiceStorage(diceStorage);
                 }
-                    /*var numDices = dice().Count();
-                    //diceinit.getAltNumber();
-
-                    var numDices = diceCreate.dice().Count();
-                    for (int i = 0; i < numDices; ++i)
-                    {
-                        var Dice = new Dice(i, parent.instance);
-                        var teamStr = "T:";
-                        diceCreate.dice(i).INTNUM();
-                        foreach (var p in teamCreate.teams(i).INTNUM())
-                        {
-                            var j = Int32.Parse(p.GetText());
-                            newTeam.teamPlayers.Add(parent.instance.players[j]);
-                            parent.instance.players[j].team = newTeam;
-                            teamStr += j + " ";
-                        }
-                        parent.instance.teams.Add(newTeam);
-                        parent.instance.WriteToFile(teamStr);
-                    }
-
-                    parent.instance.currentTeam.Push(new StageCycle<Team>(parent.instance.teams, parent.instance));
-                    Debug.WriteLine("NUMTEAMS:" + parent.instance.teams.Count);
-                    Debug.WriteLine("Creating dice.");
-
-                }*/
+                    
             }
             return ret;
 		}
 
-        private void ProcessDice(RecycleParser.DicecreateContext diceinit)
+        private void ProcessDiceStorage(RecycleParser.DicecreateContext diceStorage)
         {
-            var numDices = diceinit.dice().Count();
-            foreach (var dice in diceinit.dice()) {
-                var createdDice = new Dice(ProcessInt(dice.@int()));
-                Debug.WriteLine("Creating dice with size: " + createdDice.ToString());
-                parent.instance.dices.Add(createdDice);
+            var numDices = diceStorage.dice().Count();
+            var createdStorage = new DiceStorage();
+            foreach (var dice in diceStorage.dice()) {
+                createdStorage.ListDices.Add(new Dice(ProcessInt(dice.@int())));
+                parent.instance.dicesStorages.Add(createdStorage);
             }
             
         }

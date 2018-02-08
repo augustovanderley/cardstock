@@ -76,13 +76,13 @@ public partial class RecycleParser : Parser {
 	private static readonly string[] _LiteralNames = {
 		null, "'''", "'game'", "'setup'", "'stage'", "'player'", "'team'", "'scoring'", 
 		"'min'", "'max'", "'end'", "'choice'", "'do'", "'any'", "'all'", "'let'", 
-		"'declare'", "'create'", "'players'", "'teams'", "'deck'", "'dice'", "','", 
-		"'put'", "'points'", "'cycle'", "'next'", "'current'", "'previous'", "'set'", 
-		"'inc'", "'dec'", "'move'", "'remember'", "'forget'", "'shuffle'", "'turn'", 
-		"'pass'", "'repeat'", "'throwalldices'", "'top'", "'bottom'", "'actual'", 
-		"'sto'", "'tuples'", "'using'", "'vloc'", "'iloc'", "'hloc'", "'mem'", 
-		"'owner'", "'other'", "'range'", "'..'", "'filter'", "'cardatt'", "'+'", 
-		"'*'", "'-'", "'%'", "'//'", "'size'", "'union'", "'sum'", "'score'", 
+		"'declare'", "'create'", "'players'", "'teams'", "'deck'", "'dicestorage'", 
+		"','", "'put'", "'points'", "'cycle'", "'next'", "'current'", "'previous'", 
+		"'set'", "'inc'", "'dec'", "'move'", "'remember'", "'forget'", "'shuffle'", 
+		"'turn'", "'pass'", "'repeat'", "'throwalldices'", "'top'", "'bottom'", 
+		"'actual'", "'sto'", "'tuples'", "'using'", "'vloc'", "'iloc'", "'hloc'", 
+		"'mem'", "'owner'", "'other'", "'range'", "'..'", "'filter'", "'cardatt'", 
+		"'+'", "'*'", "'-'", "'%'", "'//'", "'size'", "'union'", "'sum'", "'score'", 
 		null, null, null, "'not'", null, null, "'('", "')'"
 	};
 	private static readonly string[] _SymbolicNames = {
