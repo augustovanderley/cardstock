@@ -6,6 +6,7 @@ namespace CardEngine{
 	public class Dice{
 
         public int sides;
+        public int valueLastThrow;
 
 		public Dice(int sides){
             this.sides = sides;
@@ -15,7 +16,8 @@ namespace CardEngine{
 
         public int ThrowDice() {
             Random r = new Random();
-            return r.Next(1, sides+1);
+            valueLastThrow = r.Next(1, sides+1);
+            return valueLastThrow;
         }
 
 
