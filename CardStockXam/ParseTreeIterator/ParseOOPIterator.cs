@@ -125,17 +125,8 @@ namespace ParseTreeIterator
             }
             else if (actionNode.throwalldices() != null) {
                 var gameDiceStorage = parent.instance.dicesStorage;
-                var sumDices = gameDiceStorage.ThrowAllDices();
                 var name = actionNode.throwalldices().var().GetText();
-                if (!gameDiceStorage.binDict.ContainsKey(name))
-                {
-                    gameDiceStorage.binDict.Add(name, sumDices);
-                }
-                foreach (var var in parent.instance.vars)
-                {
-                    Debug.WriteLine(var.Key + "; valor = " + var.Value);
-                }
-                Debug.WriteLine("Throwing dices of value:  " + parent.instance.dicesStorage.sumValueAllDices);
+                gameDiceStorage[name].ThrowAllDices();
             }
             else
             {
@@ -965,7 +956,7 @@ namespace ParseTreeIterator
             }
             else if (intNode.dicevalue() != null) {
                 var key = intNode.dicevalue().var().GetText();
-                var value = parent.instance.dicesStorage.binDict[key];
+                var value = parent.instance.dicesStorage[key].SumValueAllDices();
                 Debug.WriteLine("reading dice key: " + key + " and value " + value);
                 return value;
                
@@ -1175,12 +1166,14 @@ namespace ParseTreeIterator
         private void ProcessDiceStorage(RecycleParser.DicecreateContext diceStorage)
         {
             var numDices = diceStorage.dice().Count();
+            var diceStorageName = diceStorage.var().GetText();
             var createdStorage = new DiceStorage();
             foreach (var dice in diceStorage.dice()) {
                 createdStorage.ListDices.Add(new Dice(ProcessInt(dice.@int())));
-                
             }
-            parent.instance.dicesStorage = createdStorage;
+            if (!parent.instance.dicesStorage.ContainsKey(diceStorageName)) { 
+                parent.instance.dicesStorage.Add(diceStorageName, createdStorage);
+            }
         }
 
         public  bool CheckDeckRepeat(RecycleParser.RepeatContext reps){
