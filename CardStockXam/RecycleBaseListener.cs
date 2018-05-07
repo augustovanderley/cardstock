@@ -513,6 +513,18 @@ public partial class RecycleBaseListener : IRecycleListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitMemstorage([NotNull] RecycleParser.MemstorageContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="RecycleParser.dicevalue"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDicevalue([NotNull] RecycleParser.DicevalueContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="RecycleParser.dicevalue"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDicevalue([NotNull] RecycleParser.DicevalueContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="RecycleParser.memset"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

@@ -22,14 +22,14 @@
          (all player 'P 
               (repeat 7 (move (top (game iloc STOCK))
                               (top ('P iloc HAND)))))
-		(throwalldices)
+		(throwalldices 'SUMDICES)
    
       ))
          
       ;; players play a round 6 times     
       (stage player
          (end (all player 'P 
-                   (== (size ('P iloc HAND)) 0)))
+                   (== (size ('P iloc HAND)) (dicevalue 'SUMDICES))))
                     
          ;; players play a hand once
          (stage player

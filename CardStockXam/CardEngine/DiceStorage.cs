@@ -7,6 +7,7 @@ namespace CardEngine{
         public string name = "undefined";
         private List<Dice> listDices = new List<Dice>();
         public int sumValueAllDices;
+        public Dictionary<string, int> binDict = new Dictionary<string, int>();
 
         public DiceStorage(){
 

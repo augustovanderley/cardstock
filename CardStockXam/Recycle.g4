@@ -51,7 +51,7 @@ removeaction : 'forget' card ;
 shuffleaction : 'shuffle' cstorage ;
 turnaction : 'turn' 'pass' ;
 repeat : 'repeat' int action | 'repeat' 'all' OPEN moveaction CLOSE ;
-throwalldices : 'throwalldices'; 
+throwalldices : 'throwalldices' var; 
 
 card : var | maxof | minof | actual | OPEN ('top' | 'bottom' | int) cstorage CLOSE ;
 actual : OPEN 'actual' card CLOSE ;
@@ -59,6 +59,7 @@ actual : OPEN 'actual' card CLOSE ;
 rawstorage : OPEN (var | 'game' | who) 'sto' (namegr | var) CLOSE ;
 cstorage : var | unionof | filter | OPEN locpre locdesc (namegr | var) CLOSE | memstorage ;
 memstorage :  OPEN ('top' | 'bottom' | int) memset CLOSE ;
+dicevalue: OPEN 'dicevalue' var CLOSE;
 
 memset : tuple ;
 tuple : OPEN 'tuples' int cstorage 'using' var CLOSE ;
@@ -107,7 +108,7 @@ unionof : OPEN 'union' (agg | cstorage+?) CLOSE ;
 sum : OPEN 'sum' cstorage 'using' var CLOSE ;
 score : OPEN 'score' card 'using' var CLOSE ;
 
-int : var | sizeof | mult | subtract | mod | add | divide | sum | rawstorage | score | INTNUM+ ;
+int : var | sizeof | mult | subtract | mod | add | divide | sum | rawstorage | score | dicevalue |  INTNUM+ ;
 INTNUM : [0-9] ;
 
 namegr : (LETT)+ ;

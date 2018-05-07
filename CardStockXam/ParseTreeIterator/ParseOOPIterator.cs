@@ -124,7 +124,17 @@ namespace ParseTreeIterator
                 ret.AddRange(ProcessRepeat(actionNode.repeat()));
             }
             else if (actionNode.throwalldices() != null) {
-                parent.instance.dicesStorages.First().ThrowAllDices();
+                var gameDiceStorage = parent.instance.dicesStorages.First();
+                var sumDices = gameDiceStorage.ThrowAllDices();
+                var name = actionNode.throwalldices().var().GetText();
+                if (!gameDiceStorage.binDict.ContainsKey(name))
+                {
+                    gameDiceStorage.binDict.Add(name, sumDices);
+                }
+                foreach (var var in parent.instance.vars)
+                {
+                    Debug.WriteLine(var.Key + "; valor = " + var.Value);
+                }
                 Debug.WriteLine("Throwing dices of value:  " + parent.instance.dicesStorages.First().sumValueAllDices);
             }
             else
@@ -854,38 +864,50 @@ namespace ParseTreeIterator
         }
 		
 		public  int ProcessInt(RecycleParser.IntContext intNode){
-            if (intNode.rawstorage() != null) {
+            if (intNode.rawstorage() != null)
+            {
                 var fancy = ProcessRawStorage(intNode.rawstorage());
                 return fancy.Get();
             }
-            else if (intNode.INTNUM() != null && intNode.INTNUM().Any()) {
+            else if (intNode.INTNUM() != null && intNode.INTNUM().Any())
+            {
                 Debug.WriteLine(intNode.GetText());
                 return int.Parse(intNode.GetText());
             }
-            else if (intNode.@sizeof() != null) {
-                if (intNode.@sizeof().cstorage() != null) {
+            else if (intNode.@sizeof() != null)
+            {
+                if (intNode.@sizeof().cstorage() != null)
+                {
                     return ProcessLocation(intNode.@sizeof().cstorage()).Count();
                 }
-                else if (intNode.@sizeof().memset() != null) {
+                else if (intNode.@sizeof().memset() != null)
+                {
                     return ProcessMemset(intNode.@sizeof().memset()).Length;
                 }
-                else if (intNode.@sizeof().var() != null){
-                   
+                else if (intNode.@sizeof().var() != null)
+                {
+
                     var temp = Get(intNode.@sizeof().var());
                     Debug.WriteLine(temp.GetType());
                     var temp2 = temp as FancyCardLocation;
-					
-                    if (temp2 != null){
-                        if (temp2.locIdentifier != "-1"){
+
+                    if (temp2 != null)
+                    {
+                        if (temp2.locIdentifier != "-1")
+                        {
                             return temp2.Count();
                         }
                         throw new TypeAccessException();
                     }
-                    else{
+                    else
+                    {
                         var temp3 = temp as FancyCardLocation[];
-                        if (temp3 != null){
+                        if (temp3 != null)
+                        {
                             return temp3.Length;
-                        } else {
+                        }
+                        else
+                        {
                             var temp4 = temp as List<Card>;
                             if (temp4 != null)
                             {
@@ -895,47 +917,65 @@ namespace ParseTreeIterator
                         throw new TypeAccessException();
                     }
                 }
-                else {
+                else
+                {
                     Debug.WriteLine("failed to find size");
                     return 0;
                 }
             }
-            else if (intNode.mult() != null) {
+            else if (intNode.mult() != null)
+            {
                 return ProcessInt(intNode.mult().@int(0)) * ProcessInt(intNode.mult().@int(1));
             }
-            else if (intNode.subtract() != null) {
+            else if (intNode.subtract() != null)
+            {
                 return ProcessInt(intNode.subtract().@int(0)) - ProcessInt(intNode.subtract().@int(1));
             }
-            else if (intNode.mod() != null) {
+            else if (intNode.mod() != null)
+            {
                 return ProcessInt(intNode.mod().@int(0)) % ProcessInt(intNode.mod().@int(1));
             }
-            else if (intNode.divide() != null) {
+            else if (intNode.divide() != null)
+            {
                 return ProcessInt(intNode.divide().@int(0)) / ProcessInt(intNode.divide().@int(1));
             }
-            else if (intNode.@add() != null) {
+            else if (intNode.@add() != null)
+            {
                 return ProcessInt(intNode.@add().@int(0)) + ProcessInt(intNode.@add().@int(1));
             }
-            else if (intNode.sum() != null) {
+            else if (intNode.sum() != null)
+            {
                 var sum = intNode.sum();
                 var scoring = parent.instance.points[sum.var().GetText()];
                 var coll = ProcessLocation(sum.cstorage());
                 int total = 0;
-                foreach (var c in coll.cardList.AllCards()) {
+                foreach (var c in coll.cardList.AllCards())
+                {
                     total += scoring.GetScore(c);
                 }
                 Debug.WriteLine("Sum:" + total);
                 return total;
             }
-            else if (intNode.score() != null) {
+            else if (intNode.score() != null)
+            {
                 Debug.WriteLine("trying to score" + intNode.GetText());
                 var scorer = parent.instance.points[intNode.score().var().GetText()];
                 var card = ProcessCard(intNode.score().card());
                 return scorer.GetScore(card.Get());
             }
-            else if (intNode.var() != null){
+            else if (intNode.dicevalue() != null) {
+                var key = intNode.dicevalue().var().GetText();
+                var value = parent.instance.dicesStorages.First().binDict[key];
+                Debug.WriteLine("reading dice key: " + key + " and value " + value);
+                return value;
+               
+            }
+            else if (intNode.var() != null)
+            {
                 return ProcessIntVar(intNode.var());
             }
-            else {
+            else
+            {
                 throw new InvalidDataException();
             }
 		}
@@ -1606,7 +1646,7 @@ namespace ParseTreeIterator
         }
         public  void Put(string k, Object v){
             parent.instance.vars[k] = v;
-           // Console.WriteLine("putting key " + k + " for " + v);
+            Debug.WriteLine(" teeeste putting key " + k + " for " + v);
         }
         public  void Remove(string k){
             if (!parent.instance.vars.ContainsKey(k)) {
@@ -1960,7 +2000,9 @@ namespace ParseTreeIterator
         }
 
         public  int ProcessIntVar(RecycleParser.VarContext varContext){
+            Debug.WriteLine("deu ruim");
             var temp = Get(varContext.GetText());
+
             if (temp is FancyRawStorage){
                 var raw = temp as FancyRawStorage;
                 return raw.Get();

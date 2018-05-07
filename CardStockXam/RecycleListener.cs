@@ -429,6 +429,16 @@ public interface IRecycleListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitMemstorage([NotNull] RecycleParser.MemstorageContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="RecycleParser.dicevalue"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDicevalue([NotNull] RecycleParser.DicevalueContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="RecycleParser.dicevalue"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDicevalue([NotNull] RecycleParser.DicevalueContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="RecycleParser.memset"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
