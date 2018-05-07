@@ -124,7 +124,7 @@ namespace ParseTreeIterator
                 ret.AddRange(ProcessRepeat(actionNode.repeat()));
             }
             else if (actionNode.throwalldices() != null) {
-                var gameDiceStorage = parent.instance.dicesStorages.First();
+                var gameDiceStorage = parent.instance.dicesStorage;
                 var sumDices = gameDiceStorage.ThrowAllDices();
                 var name = actionNode.throwalldices().var().GetText();
                 if (!gameDiceStorage.binDict.ContainsKey(name))
@@ -135,7 +135,7 @@ namespace ParseTreeIterator
                 {
                     Debug.WriteLine(var.Key + "; valor = " + var.Value);
                 }
-                Debug.WriteLine("Throwing dices of value:  " + parent.instance.dicesStorages.First().sumValueAllDices);
+                Debug.WriteLine("Throwing dices of value:  " + parent.instance.dicesStorage.sumValueAllDices);
             }
             else
             {
@@ -965,7 +965,7 @@ namespace ParseTreeIterator
             }
             else if (intNode.dicevalue() != null) {
                 var key = intNode.dicevalue().var().GetText();
-                var value = parent.instance.dicesStorages.First().binDict[key];
+                var value = parent.instance.dicesStorage.binDict[key];
                 Debug.WriteLine("reading dice key: " + key + " and value " + value);
                 return value;
                
@@ -1178,9 +1178,9 @@ namespace ParseTreeIterator
             var createdStorage = new DiceStorage();
             foreach (var dice in diceStorage.dice()) {
                 createdStorage.ListDices.Add(new Dice(ProcessInt(dice.@int())));
-                parent.instance.dicesStorages.Add(createdStorage);
+                
             }
-            
+            parent.instance.dicesStorage = createdStorage;
         }
 
         public  bool CheckDeckRepeat(RecycleParser.RepeatContext reps){

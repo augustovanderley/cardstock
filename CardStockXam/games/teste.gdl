@@ -29,7 +29,7 @@
       ;; players play a round 6 times     
       (stage player
          (end (all player 'P 
-                   (== (size ('P iloc HAND)) (dicevalue 'SUMDICES))))
+                   (== (size ('P iloc HAND)) 0)))
                     
          ;; players play a hand once
          (stage player
