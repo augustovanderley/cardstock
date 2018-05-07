@@ -127,6 +127,7 @@ namespace ParseTreeIterator
                 var gameDiceStorage = parent.instance.dicesStorage;
                 var name = actionNode.throwalldices().var().GetText();
                 gameDiceStorage[name].ThrowAllDices();
+                Debug.WriteLine("Throwing sum = " + gameDiceStorage[name].sumValueAllDices);
             }
             else
             {
