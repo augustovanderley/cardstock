@@ -5,7 +5,7 @@
       (create players 2)
       (create teams (0) (1))
 
-	  (create dicestorage 'GAMEDICE (20) (20) )
+	  (create diestorage 'GAMEDICE (20) (20) )
 
       ;; Create the deck source
       (create deck (game iloc STOCK) (deck (RANK (A, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, J, Q, K))
@@ -14,8 +14,8 @@
     )
     (do (
       (shuffle (game iloc STOCK))
-	  (throwalldices 'GAMEDICE)
-	  (throwalldices 'GAMEDICE)
+	  (throwalldice 'GAMEDICE)
+	  (throwalldice 'GAMEDICE)
       (all player 'P
          (do (
             (repeat 2
@@ -79,19 +79,19 @@
          (choice (
    
                   
-            ((or (< (sum ((current player) iloc HAND) using 'POINTSHIGH) (+ (dicevalue 'GAMEDICE) 21))
-                 (< (sum ((current player) iloc HAND) using 'POINTSLOW) (+ (dicevalue 'GAMEDICE) 21)))
+            ((or (< (sum ((current player) iloc HAND) using 'POINTSHIGH) (+ (dievalue 'GAMEDICE) 21))
+                 (< (sum ((current player) iloc HAND) using 'POINTSLOW) (+ (dievalue 'GAMEDICE) 21)))
              (do (
                 (move (top (game iloc STOCK)) 
                       (top ((current player) iloc HAND)))
                ;; (set ((current player) sto BET) (*(size((current player) iloc HAND)) 10))
-                ((or (< (sum ((current player) iloc HAND) using 'POINTSHIGH) (+ (dicevalue 'GAMEDICE) 21))
-                 (< (sum ((current player) iloc HAND) using 'POINTSLOW) (+ (dicevalue 'GAMEDICE) 21)))
+                ((or (< (sum ((current player) iloc HAND) using 'POINTSHIGH) (+ (dievalue 'GAMEDICE) 21))
+                 (< (sum ((current player) iloc HAND) using 'POINTSLOW) (+ (dievalue 'GAMEDICE) 21)))
                 (cycle next current))
             )))
             
-            ((or (< (sum ((current player) iloc HAND) using 'POINTSHIGH) (+ (dicevalue 'GAMEDICE) 21))
-                 (< (sum ((current player) iloc HAND) using 'POINTSLOW) (+ (dicevalue 'GAMEDICE) 21)))
+            ((or (< (sum ((current player) iloc HAND) using 'POINTSHIGH) (+ (dievalue 'GAMEDICE) 21))
+                 (< (sum ((current player) iloc HAND) using 'POINTSLOW) (+ (dievalue 'GAMEDICE) 21)))
              (set ((current player) sto FINISHED) 1))
             
        
@@ -99,8 +99,8 @@
            
          ))
          (do (
-          ((and (>= (sum ((current player) iloc HAND) using 'POINTSHIGH) (+ (dicevalue 'GAMEDICE) 21))
-                  (>= (sum ((current player) iloc HAND) using 'POINTSLOW) (+ (dicevalue 'GAMEDICE) 21)))
+          ((and (>= (sum ((current player) iloc HAND) using 'POINTSHIGH) (+ (dievalue 'GAMEDICE) 21))
+                  (>= (sum ((current player) iloc HAND) using 'POINTSLOW) (+ (dievalue 'GAMEDICE) 21)))
              (do (
                  (repeat all
                     (move (top ((current player) iloc HAND)) 
@@ -118,12 +118,12 @@
             (all player 'P
                  (do (
                       ((< (sum ('P iloc HAND) using 'POINTSHIGH)
-                          (+ (dicevalue 'GAMEDICE) 21))
+                          (+ (dievalue 'GAMEDICE) 21))
                        (set ('P sto SCOREHAND) (sum ('P iloc HAND) using 'POINTSHIGH))
                        )
            
                       ((>= (sum ('P iloc HAND) using 'POINTSHIGH)
-                           (+ (dicevalue 'GAMEDICE) 21))
+                           (+ (dievalue 'GAMEDICE) 21))
                        (set ('P sto SCOREHAND) (sum ('P iloc HAND) using 'POINTSLOW)))
        
                       ))

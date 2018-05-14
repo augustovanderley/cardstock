@@ -3,13 +3,13 @@
 grammar Recycle;
 var : '\'' namegr ;
 game : OPEN 'game' declare*? setup (multiaction | stage)+? scoring CLOSE ;
-setup : OPEN 'setup' playercreate OPEN teamcreate CLOSE (OPEN (deckcreate | repeat | dicecreate) CLOSE)+? CLOSE ;
+setup : OPEN 'setup' playercreate OPEN teamcreate CLOSE (OPEN (deckcreate | repeat | diecreate) CLOSE)+? CLOSE ;
 stage : OPEN 'stage' ('player' | 'team') endcondition (multiaction | stage)+? CLOSE ;
 scoring : OPEN 'scoring' ('min' | 'max') int CLOSE ;
 endcondition : OPEN 'end' boolean CLOSE ;
 
 action : OPEN (initpoints | teamcreate | deckcreate | cycleaction | setaction | moveaction | copyaction
-         | incaction | decaction | removeaction | turnaction | shuffleaction | repeat | throwalldices) CLOSE | agg ;
+         | incaction | decaction | removeaction | turnaction | shuffleaction | repeat | throwalldice) CLOSE | agg ;
 
 multiaction : OPEN 'choice' OPEN (condact)+? CLOSE CLOSE | 
 			  OPEN 'do' OPEN (condact)+? CLOSE CLOSE | 
@@ -26,8 +26,8 @@ declare : OPEN 'declare' typed var CLOSE ;
 playercreate : OPEN 'create' 'players' (var | int) CLOSE ;
 teamcreate : 'create' 'teams' teams+? ;
 deckcreate : 'create' 'deck' cstorage deck ;
-dicecreate: 'create' 'dicestorage' var dice+ ;
-dice: OPEN (int) CLOSE ;
+diecreate: 'create' 'diestorage' var die+ ;
+die: OPEN (int) CLOSE ;
 deck : OPEN 'deck' attribute+? CLOSE ;
 teams : OPEN (INTNUM ',')*? INTNUM teams*? CLOSE ;
 attribute : OPEN var CLOSE | OPEN (namegr ',')*? namegr attribute*? CLOSE ;
@@ -48,7 +48,7 @@ removeaction : 'forget' card ;
 shuffleaction : 'shuffle' cstorage ;
 turnaction : 'turn' 'pass' ;
 repeat : 'repeat' int action | 'repeat' 'all' OPEN moveaction CLOSE ;
-throwalldices : 'throwalldices' var; 
+throwalldice : 'throwalldice' var; 
 
 card : var | maxof | minof | actual | OPEN ('top' | 'bottom' | int) cstorage CLOSE ;
 actual : OPEN 'actual' card CLOSE ;
@@ -56,7 +56,7 @@ actual : OPEN 'actual' card CLOSE ;
 rawstorage : OPEN (var | 'game' | who) 'sto' (namegr | var) CLOSE ;
 cstorage : var | unionof | filter | OPEN locpre locdesc (namegr | var) CLOSE | memstorage ;
 memstorage :  OPEN ('top' | 'bottom' | int) memset CLOSE ;
-dicevalue: OPEN 'dicevalue' var CLOSE;
+dievalue: OPEN 'dievalue' var CLOSE;
 
 memset : tuple ;
 tuple : OPEN 'tuples' int cstorage 'using' var CLOSE ;
@@ -105,7 +105,7 @@ unionof : OPEN 'union' (agg | cstorage+?) CLOSE ;
 sum : OPEN 'sum' cstorage 'using' var CLOSE ;
 score : OPEN 'score' card 'using' var CLOSE ;
 
-int : var | sizeof | mult | subtract | mod | add | divide | sum | rawstorage | score | dicevalue |  INTNUM+ ;
+int : var | sizeof | mult | subtract | mod | add | divide | sum | rawstorage | score | dievalue |  INTNUM+ ;
 INTNUM : [0-9] ;
 
 namegr : (LETT)+ ;

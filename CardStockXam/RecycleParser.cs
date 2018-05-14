@@ -46,13 +46,13 @@ public partial class RecycleParser : Parser {
 		RULE_var = 0, RULE_game = 1, RULE_setup = 2, RULE_stage = 3, RULE_scoring = 4, 
 		RULE_endcondition = 5, RULE_action = 6, RULE_multiaction = 7, RULE_multiaction2 = 8, 
 		RULE_condact = 9, RULE_agg = 10, RULE_let = 11, RULE_declare = 12, RULE_playercreate = 13, 
-		RULE_teamcreate = 14, RULE_deckcreate = 15, RULE_dicecreate = 16, RULE_dice = 17, 
+		RULE_teamcreate = 14, RULE_deckcreate = 15, RULE_diecreate = 16, RULE_die = 17, 
 		RULE_deck = 18, RULE_teams = 19, RULE_attribute = 20, RULE_initpoints = 21, 
 		RULE_awards = 22, RULE_subaward = 23, RULE_cycleaction = 24, RULE_setaction = 25, 
 		RULE_incaction = 26, RULE_decaction = 27, RULE_moveaction = 28, RULE_copyaction = 29, 
 		RULE_removeaction = 30, RULE_shuffleaction = 31, RULE_turnaction = 32, 
-		RULE_repeat = 33, RULE_throwalldices = 34, RULE_card = 35, RULE_actual = 36, 
-		RULE_rawstorage = 37, RULE_cstorage = 38, RULE_memstorage = 39, RULE_dicevalue = 40, 
+		RULE_repeat = 33, RULE_throwalldice = 34, RULE_card = 35, RULE_actual = 36, 
+		RULE_rawstorage = 37, RULE_cstorage = 38, RULE_memstorage = 39, RULE_dievalue = 40, 
 		RULE_memset = 41, RULE_tuple = 42, RULE_locpre = 43, RULE_locdesc = 44, 
 		RULE_who = 45, RULE_whop = 46, RULE_whot = 47, RULE_whodesc = 48, RULE_owner = 49, 
 		RULE_teamp = 50, RULE_other = 51, RULE_typed = 52, RULE_collection = 53, 
@@ -64,11 +64,11 @@ public partial class RecycleParser : Parser {
 	public static readonly string[] ruleNames = {
 		"var", "game", "setup", "stage", "scoring", "endcondition", "action", 
 		"multiaction", "multiaction2", "condact", "agg", "let", "declare", "playercreate", 
-		"teamcreate", "deckcreate", "dicecreate", "dice", "deck", "teams", "attribute", 
+		"teamcreate", "deckcreate", "diecreate", "die", "deck", "teams", "attribute", 
 		"initpoints", "awards", "subaward", "cycleaction", "setaction", "incaction", 
 		"decaction", "moveaction", "copyaction", "removeaction", "shuffleaction", 
-		"turnaction", "repeat", "throwalldices", "card", "actual", "rawstorage", 
-		"cstorage", "memstorage", "dicevalue", "memset", "tuple", "locpre", "locdesc", 
+		"turnaction", "repeat", "throwalldice", "card", "actual", "rawstorage", 
+		"cstorage", "memstorage", "dievalue", "memset", "tuple", "locpre", "locdesc", 
 		"who", "whop", "whot", "whodesc", "owner", "teamp", "other", "typed", 
 		"collection", "strcollection", "cstoragecollection", "range", "filter", 
 		"attrcomp", "cardatt", "boolean", "intop", "add", "mult", "subtract", 
@@ -79,11 +79,11 @@ public partial class RecycleParser : Parser {
 	private static readonly string[] _LiteralNames = {
 		null, "'''", "'game'", "'setup'", "'stage'", "'player'", "'team'", "'scoring'", 
 		"'min'", "'max'", "'end'", "'choice'", "'do'", "'any'", "'all'", "'let'", 
-		"'declare'", "'create'", "'players'", "'teams'", "'deck'", "'dicestorage'", 
+		"'declare'", "'create'", "'players'", "'teams'", "'deck'", "'diestorage'", 
 		"','", "'put'", "'points'", "'cycle'", "'next'", "'current'", "'previous'", 
 		"'set'", "'inc'", "'dec'", "'move'", "'remember'", "'forget'", "'shuffle'", 
-		"'turn'", "'pass'", "'repeat'", "'throwalldices'", "'top'", "'bottom'", 
-		"'actual'", "'sto'", "'dicevalue'", "'tuples'", "'using'", "'vloc'", "'iloc'", 
+		"'turn'", "'pass'", "'repeat'", "'throwalldice'", "'top'", "'bottom'", 
+		"'actual'", "'sto'", "'dievalue'", "'tuples'", "'using'", "'vloc'", "'iloc'", 
 		"'hloc'", "'mem'", "'owner'", "'other'", "'range'", "'..'", "'filter'", 
 		"'cardatt'", "'+'", "'*'", "'-'", "'%'", "'//'", "'size'", "'union'", 
 		"'sum'", "'score'", null, null, null, "'not'", null, null, "'('", "')'"
@@ -299,11 +299,11 @@ public partial class RecycleParser : Parser {
 		public RepeatContext repeat(int i) {
 			return GetRuleContext<RepeatContext>(i);
 		}
-		public DicecreateContext[] dicecreate() {
-			return GetRuleContexts<DicecreateContext>();
+		public DiecreateContext[] diecreate() {
+			return GetRuleContexts<DiecreateContext>();
 		}
-		public DicecreateContext dicecreate(int i) {
-			return GetRuleContext<DicecreateContext>(i);
+		public DiecreateContext diecreate(int i) {
+			return GetRuleContext<DiecreateContext>(i);
 		}
 		public SetupContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
@@ -357,7 +357,7 @@ public partial class RecycleParser : Parser {
 						break;
 					case 3:
 						{
-						State = 180; dicecreate();
+						State = 180; diecreate();
 						}
 						break;
 					}
@@ -623,8 +623,8 @@ public partial class RecycleParser : Parser {
 		public RepeatContext repeat() {
 			return GetRuleContext<RepeatContext>(0);
 		}
-		public ThrowalldicesContext throwalldices() {
-			return GetRuleContext<ThrowalldicesContext>(0);
+		public ThrowalldiceContext throwalldice() {
+			return GetRuleContext<ThrowalldiceContext>(0);
 		}
 		public AggContext agg() {
 			return GetRuleContext<AggContext>(0);
@@ -724,7 +724,7 @@ public partial class RecycleParser : Parser {
 					break;
 				case 14:
 					{
-					State = 228; throwalldices();
+					State = 228; throwalldice();
 					}
 					break;
 				}
@@ -1440,35 +1440,35 @@ public partial class RecycleParser : Parser {
 		return _localctx;
 	}
 
-	public partial class DicecreateContext : ParserRuleContext {
+	public partial class DiecreateContext : ParserRuleContext {
 		public VarContext var() {
 			return GetRuleContext<VarContext>(0);
 		}
-		public DiceContext[] dice() {
-			return GetRuleContexts<DiceContext>();
+		public DieContext[] die() {
+			return GetRuleContexts<DieContext>();
 		}
-		public DiceContext dice(int i) {
-			return GetRuleContext<DiceContext>(i);
+		public DieContext die(int i) {
+			return GetRuleContext<DieContext>(i);
 		}
-		public DicecreateContext(ParserRuleContext parent, int invokingState)
+		public DiecreateContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_dicecreate; } }
+		public override int RuleIndex { get { return RULE_diecreate; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			IRecycleListener typedListener = listener as IRecycleListener;
-			if (typedListener != null) typedListener.EnterDicecreate(this);
+			if (typedListener != null) typedListener.EnterDiecreate(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IRecycleListener typedListener = listener as IRecycleListener;
-			if (typedListener != null) typedListener.ExitDicecreate(this);
+			if (typedListener != null) typedListener.ExitDiecreate(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public DicecreateContext dicecreate() {
-		DicecreateContext _localctx = new DicecreateContext(Context, State);
-		EnterRule(_localctx, 32, RULE_dicecreate);
+	public DiecreateContext diecreate() {
+		DiecreateContext _localctx = new DiecreateContext(Context, State);
+		EnterRule(_localctx, 32, RULE_diecreate);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
@@ -1482,7 +1482,7 @@ public partial class RecycleParser : Parser {
 			do {
 				{
 				{
-				State = 344; dice();
+				State = 344; die();
 				}
 				}
 				State = 347;
@@ -1502,31 +1502,31 @@ public partial class RecycleParser : Parser {
 		return _localctx;
 	}
 
-	public partial class DiceContext : ParserRuleContext {
+	public partial class DieContext : ParserRuleContext {
 		public ITerminalNode OPEN() { return GetToken(RecycleParser.OPEN, 0); }
 		public ITerminalNode CLOSE() { return GetToken(RecycleParser.CLOSE, 0); }
 		public IntContext @int() {
 			return GetRuleContext<IntContext>(0);
 		}
-		public DiceContext(ParserRuleContext parent, int invokingState)
+		public DieContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_dice; } }
+		public override int RuleIndex { get { return RULE_die; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			IRecycleListener typedListener = listener as IRecycleListener;
-			if (typedListener != null) typedListener.EnterDice(this);
+			if (typedListener != null) typedListener.EnterDie(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IRecycleListener typedListener = listener as IRecycleListener;
-			if (typedListener != null) typedListener.ExitDice(this);
+			if (typedListener != null) typedListener.ExitDie(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public DiceContext dice() {
-		DiceContext _localctx = new DiceContext(Context, State);
-		EnterRule(_localctx, 34, RULE_dice);
+	public DieContext die() {
+		DieContext _localctx = new DieContext(Context, State);
+		EnterRule(_localctx, 34, RULE_die);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
@@ -2496,29 +2496,29 @@ public partial class RecycleParser : Parser {
 		return _localctx;
 	}
 
-	public partial class ThrowalldicesContext : ParserRuleContext {
+	public partial class ThrowalldiceContext : ParserRuleContext {
 		public VarContext var() {
 			return GetRuleContext<VarContext>(0);
 		}
-		public ThrowalldicesContext(ParserRuleContext parent, int invokingState)
+		public ThrowalldiceContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_throwalldices; } }
+		public override int RuleIndex { get { return RULE_throwalldice; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			IRecycleListener typedListener = listener as IRecycleListener;
-			if (typedListener != null) typedListener.EnterThrowalldices(this);
+			if (typedListener != null) typedListener.EnterThrowalldice(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IRecycleListener typedListener = listener as IRecycleListener;
-			if (typedListener != null) typedListener.ExitThrowalldices(this);
+			if (typedListener != null) typedListener.ExitThrowalldice(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public ThrowalldicesContext throwalldices() {
-		ThrowalldicesContext _localctx = new ThrowalldicesContext(Context, State);
-		EnterRule(_localctx, 68, RULE_throwalldices);
+	public ThrowalldiceContext throwalldice() {
+		ThrowalldiceContext _localctx = new ThrowalldiceContext(Context, State);
+		EnterRule(_localctx, 68, RULE_throwalldice);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
@@ -2956,31 +2956,31 @@ public partial class RecycleParser : Parser {
 		return _localctx;
 	}
 
-	public partial class DicevalueContext : ParserRuleContext {
+	public partial class DievalueContext : ParserRuleContext {
 		public ITerminalNode OPEN() { return GetToken(RecycleParser.OPEN, 0); }
 		public VarContext var() {
 			return GetRuleContext<VarContext>(0);
 		}
 		public ITerminalNode CLOSE() { return GetToken(RecycleParser.CLOSE, 0); }
-		public DicevalueContext(ParserRuleContext parent, int invokingState)
+		public DievalueContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_dicevalue; } }
+		public override int RuleIndex { get { return RULE_dievalue; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			IRecycleListener typedListener = listener as IRecycleListener;
-			if (typedListener != null) typedListener.EnterDicevalue(this);
+			if (typedListener != null) typedListener.EnterDievalue(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IRecycleListener typedListener = listener as IRecycleListener;
-			if (typedListener != null) typedListener.ExitDicevalue(this);
+			if (typedListener != null) typedListener.ExitDievalue(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public DicevalueContext dicevalue() {
-		DicevalueContext _localctx = new DicevalueContext(Context, State);
-		EnterRule(_localctx, 80, RULE_dicevalue);
+	public DievalueContext dievalue() {
+		DievalueContext _localctx = new DievalueContext(Context, State);
+		EnterRule(_localctx, 80, RULE_dievalue);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
@@ -4977,8 +4977,8 @@ public partial class RecycleParser : Parser {
 		public ScoreContext score() {
 			return GetRuleContext<ScoreContext>(0);
 		}
-		public DicevalueContext dicevalue() {
-			return GetRuleContext<DicevalueContext>(0);
+		public DievalueContext dievalue() {
+			return GetRuleContext<DievalueContext>(0);
 		}
 		public ITerminalNode[] INTNUM() { return GetTokens(RecycleParser.INTNUM); }
 		public ITerminalNode INTNUM(int i) {
@@ -5070,7 +5070,7 @@ public partial class RecycleParser : Parser {
 			case 11:
 				EnterOuterAlt(_localctx, 11);
 				{
-				State = 798; dicevalue();
+				State = 798; dievalue();
 				}
 				break;
 			case 12:

@@ -5,32 +5,32 @@ using System.Diagnostics;
 namespace CardEngine{
 	public class DiceStorage {
         public string name = "undefined";
-        private List<Dice> listDices = new List<Dice>();
-        public int sumValueAllDices;
+        private List<Die> listDice = new List<Die>();
+        public int sumValueAllDice;
 
         public DiceStorage(){
 
 		}
-        public int ThrowAllDices()
+        public int ThrowAllDice()
         {
-            int sumDices = 0;
-            foreach (var dice in listDices)
+            int sumDice = 0;
+            foreach (var die in listDice)
             {
-                sumDices += dice.ThrowDice();
+                sumDice += die.ThrowDie();
             }
-            sumValueAllDices = sumDices;
-            return sumDices;
+            sumValueAllDice = sumDice;
+            return sumDice;
         }
 
-        public int SumValueAllDices() {
-            int sumDices = 0;
-            foreach (var dice in listDices)
+        public int SumValueAllDice() {
+            int sumDice = 0;
+            foreach (var die in listDice)
             {
-                sumDices += dice.valueLastThrow;
+                sumDice += die.valueLastThrow;
             }
-            sumValueAllDices = sumDices;
-            return sumDices;
+            sumValueAllDice = sumDice;
+            return sumDice;
         }
-        public List<Dice> ListDices { get => listDices; set => listDices = value; }
+        public List<Die> ListDice { get => listDice; set => listDice = value; }
     }
 }

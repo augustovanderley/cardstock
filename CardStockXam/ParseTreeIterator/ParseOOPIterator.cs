@@ -123,11 +123,11 @@ namespace ParseTreeIterator
             {
                 ret.AddRange(ProcessRepeat(actionNode.repeat()));
             }
-            else if (actionNode.throwalldices() != null) {
+            else if (actionNode.throwalldice() != null) {
                 var gameDiceStorage = parent.instance.dicesStorage;
-                var name = actionNode.throwalldices().var().GetText();
-                gameDiceStorage[name].ThrowAllDices();
-                Debug.WriteLine("Throwing sum = " + gameDiceStorage[name].sumValueAllDices);
+                var name = actionNode.throwalldice().var().GetText();
+                gameDiceStorage[name].ThrowAllDice();
+                Debug.WriteLine("Throwing sum = " + gameDiceStorage[name].sumValueAllDice);
             }
             else
             {
@@ -955,9 +955,9 @@ namespace ParseTreeIterator
                 var card = ProcessCard(intNode.score().card());
                 return scorer.GetScore(card.Get());
             }
-            else if (intNode.dicevalue() != null) {
-                var key = intNode.dicevalue().var().GetText();
-                var value = parent.instance.dicesStorage[key].SumValueAllDices();
+            else if (intNode.dievalue() != null) {
+                var key = intNode.dievalue().var().GetText();
+                var value = parent.instance.dicesStorage[key].SumValueAllDice();
                 Debug.WriteLine("reading dice key: " + key + " and value " + value);
                 return value;
                
@@ -1151,11 +1151,11 @@ namespace ParseTreeIterator
                     }
                 }
             }
-            if (setupNode.dicecreate() != null)
+            if (setupNode.diecreate() != null)
             {
                 Debug.WriteLine("Creating dices.");
-                var dices = setupNode.dicecreate();
-                foreach (var diceStorage in dices)
+                var dice = setupNode.diecreate();
+                foreach (var diceStorage in dice)
                 {
                     ProcessDiceStorage(diceStorage);
                 }
@@ -1164,13 +1164,13 @@ namespace ParseTreeIterator
             return ret;
 		}
 
-        private void ProcessDiceStorage(RecycleParser.DicecreateContext diceStorage)
+        private void ProcessDiceStorage(RecycleParser.DiecreateContext diceStorage)
         {
-            var numDices = diceStorage.dice().Count();
+            var numDices = diceStorage.die().Count();
             var diceStorageName = diceStorage.var().GetText();
             var createdStorage = new DiceStorage();
-            foreach (var dice in diceStorage.dice()) {
-                createdStorage.ListDices.Add(new Dice(ProcessInt(dice.@int())));
+            foreach (var dice in diceStorage.die()) {
+                createdStorage.ListDice.Add(new Die(ProcessInt(dice.@int())));
             }
             if (!parent.instance.dicesStorage.ContainsKey(diceStorageName)) { 
                 parent.instance.dicesStorage.Add(diceStorageName, createdStorage);
