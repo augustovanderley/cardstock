@@ -7,16 +7,18 @@ namespace CardEngine{
 
         public int sides;
         public int valueLastThrow;
-
-		public Die(int sides){
+        private static Random rnd;
+        public Die(int sides){
             this.sides = sides;
 		}
-
+        static Die() {
+            rnd = new Random();
+        }
         public int Sides { get => sides; set => sides = value; }
 
         public int ThrowDie() {
-            Random r = new Random();
-            valueLastThrow = r.Next(1, sides+1);
+            valueLastThrow = rnd.Next(1, sides+1);
+            Debug.WriteLine("valueLastThrow = " + valueLastThrow);
             return valueLastThrow;
         }
 
