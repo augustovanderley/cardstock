@@ -1,0 +1,17 @@
+;; A game of dices in the GDL
+(game
+	(setup
+		(create players 4)
+		(create teams (0) (1) (2) (3))
+		(create diestorage 'GAMEDICE (6) )
+	)
+	(do(
+		(all player 'P
+         (do (
+          (throwalldice 'GAMEDICE)
+         ))
+		))
+	)
+
+	(scoring max 2)
+)

@@ -2,8 +2,8 @@
 (game
     (setup  
      ;; Set up the players, 4 players each on their own team
-      (create players 2)
-      (create teams (0) (1))
+      (create players 4)
+      (create teams (0) (1) (2) (3))
 
 	  (create diestorage 'GAMEDICE (20) (20) )
 
