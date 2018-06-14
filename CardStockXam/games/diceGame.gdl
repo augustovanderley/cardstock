@@ -5,13 +5,27 @@
 		(create teams (0) (1) (2) (3))
 		(create diestorage 'GAMEDICE (6) )
 	)
-	(do(
-		(all player 'P
-         (do (
-          (throwalldice 'GAMEDICE)
-         ))
-		))
+	(do (
+		(set (game sto ROUNDS) 0)
+		(set (game sto TURN) 1)
+	))
+	(stage player
+		(end (== (game sto ROUNDS) 5))
+		(stage player
+			(end (== (game sto TURN) 5))
+			(do (
+				(throwalldice 'GAMEDICE)
+				(inc ((current player) sto SCORE) (dievalue 'GAMEDICE)) 
+				(inc (game sto TURN) 1)
+			))
+		)
+
+
+		(do (
+		  (set (game sto TURN) 1)
+		  (inc (game sto ROUNDS) 1)
+        ))
 	)
 
-	(scoring max 2)
+	(scoring max ((current player) sto SCORE))
 )
