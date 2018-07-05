@@ -379,6 +379,16 @@ public interface IRecycleListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitThrowalldice([NotNull] RecycleParser.ThrowalldiceContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="RecycleParser.saveturnstats"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSaveturnstats([NotNull] RecycleParser.SaveturnstatsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="RecycleParser.saveturnstats"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSaveturnstats([NotNull] RecycleParser.SaveturnstatsContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="RecycleParser.card"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

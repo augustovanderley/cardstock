@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading;
 using CardStockXam.Scoring;
 using System.Diagnostics;
+using System;
 
 namespace CardGames
 {
@@ -18,7 +19,6 @@ namespace CardGames
             var p = new Program();
             
             p.SingleGame("games/DiceGame.gdl");
-
             //p.AllGames();
 
 

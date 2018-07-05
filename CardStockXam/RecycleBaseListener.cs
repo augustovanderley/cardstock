@@ -453,6 +453,18 @@ public partial class RecycleBaseListener : IRecycleListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitThrowalldice([NotNull] RecycleParser.ThrowalldiceContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="RecycleParser.saveturnstats"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterSaveturnstats([NotNull] RecycleParser.SaveturnstatsContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="RecycleParser.saveturnstats"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitSaveturnstats([NotNull] RecycleParser.SaveturnstatsContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="RecycleParser.card"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

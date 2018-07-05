@@ -123,11 +123,35 @@ namespace ParseTreeIterator
             {
                 ret.AddRange(ProcessRepeat(actionNode.repeat()));
             }
-            else if (actionNode.throwalldice() != null) {
+            else if (actionNode.throwalldice() != null)
+            {
                 var gameDiceStorage = parent.instance.dicesStorage;
                 var name = actionNode.throwalldice().var().GetText();
                 gameDiceStorage[name].ThrowAllDice();
                 Debug.WriteLine("Throwing sum = " + gameDiceStorage[name].sumValueAllDice);
+            }
+            else if (actionNode.saveturnstats() != null) {
+                Debug.WriteLine("Saving turn stat on file.");
+                             
+                String roundsKey = actionNode.saveturnstats().namegr()[1].GetText();
+                int rounds = parent.instance.fancyRawStorMap[roundsKey].Get();
+                Debug.WriteLine("Round = " + rounds);
+
+                String storageKey = actionNode.saveturnstats().namegr()[0].GetText();
+                                Debug.WriteLine("Storage = " + storageKey);
+
+                var csv = new StringBuilder();
+                                foreach (Player player in parent.instance.players)
+                {
+                    Debug.WriteLine("Player = " + player.name + " ");
+                    RawStorage storage = player.storage;
+                    Debug.WriteLine("Key = " + storageKey + ", Value =  " + storage[storageKey]);
+                    
+                    var newLine = string.Format("{0};{1};{2}", rounds, player.name, storage[storageKey]);
+                    csv.AppendLine(newLine);
+                }
+                File.AppendAllText("file_stats.csv", csv.ToString());
+
             }
             else
             {
@@ -1011,6 +1035,7 @@ namespace ParseTreeIterator
                 }
                 else if (raw.who().whop() != null){
                     var who = ProcessWho(raw.who()) as Player;
+                    who.storage.owner = who;
                     if (raw.namegr() != null)
                     {
                         return AddedRaw(new FancyRawStorage(who.storage, raw.namegr().GetText()));
