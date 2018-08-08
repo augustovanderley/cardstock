@@ -140,17 +140,8 @@ namespace ParseTreeIterator
                 String storageKey = actionNode.saveturnstats().namegr()[0].GetText();
                                 Debug.WriteLine("Storage = " + storageKey);
 
-                var csv = new StringBuilder();
-                                foreach (Player player in parent.instance.players)
-                {
-                    Debug.WriteLine("Player = " + player.name + " ");
-                    RawStorage storage = player.storage;
-                    Debug.WriteLine("Key = " + storageKey + ", Value =  " + storage[storageKey]);
-                    
-                    var newLine = string.Format("{0};{1};{2}", rounds, player.name, storage[storageKey]);
-                    csv.AppendLine(newLine);
-                }
-                File.AppendAllText("file_stats.csv", csv.ToString());
+                parent.instance.WriteToStatFile(storageKey, rounds);
+
 
             }
             else

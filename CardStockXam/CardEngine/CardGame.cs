@@ -516,5 +516,20 @@ namespace CardEngine
 				}
 			}
 		}
+        public void WriteToStatFile(String storageKey, int rounds)
+        {
+            var csv = new StringBuilder();
+            foreach (Player player in players)
+            {
+                Debug.WriteLine("Player = " + player.name + " ");
+                RawStorage storage = player.storage;
+                Debug.WriteLine("Key = " + storageKey + ", Value =  " + storage[storageKey]);
+
+                var newLine = string.Format("{0};{1};{2}", rounds, player.name, storage[storageKey]);
+                csv.AppendLine(newLine);
+            }
+            File.AppendAllText(fileName + ".csv", csv.ToString());
+
+        }
     }
 }

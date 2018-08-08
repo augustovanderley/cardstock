@@ -10,7 +10,7 @@
 		(set (game sto TURN) 1)
 	))
 	(stage player
-		(end (== (game sto ROUNDS) 5))
+		(end (== (game sto ROUNDS) 10))
 		(stage player
 			(end (== (game sto TURN) 5))
 			(do (
