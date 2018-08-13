@@ -25,6 +25,8 @@
 		  (set (game sto TURN) 1)
 		  (inc (game sto ROUNDS) 1)
 		  (saveturnstats SCORE roundnumber ROUNDS)
+		  (cycle current previous)
+
         ))
 	)
 
