@@ -27,7 +27,7 @@ playercreate : OPEN 'create' 'players' (var | int) CLOSE ;
 teamcreate : 'create' 'teams' teams+? ;
 deckcreate : 'create' 'deck' cstorage deck ;
 diecreate: 'create' 'diestorage' var die+ ;
-die: OPEN (int) CLOSE ;
+die: OPEN int CLOSE ;
 deck : OPEN 'deck' attribute+? CLOSE ;
 teams : OPEN (INTNUM ',')*? INTNUM teams*? CLOSE ;
 attribute : OPEN var CLOSE | OPEN (namegr ',')*? namegr attribute*? CLOSE ;
