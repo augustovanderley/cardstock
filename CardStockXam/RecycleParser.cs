@@ -1513,10 +1513,10 @@ public partial class RecycleParser : Parser {
 
 	public partial class DieContext : ParserRuleContext {
 		public ITerminalNode OPEN() { return GetToken(RecycleParser.OPEN, 0); }
-		public ITerminalNode CLOSE() { return GetToken(RecycleParser.CLOSE, 0); }
 		public IntContext @int() {
 			return GetRuleContext<IntContext>(0);
 		}
+		public ITerminalNode CLOSE() { return GetToken(RecycleParser.CLOSE, 0); }
 		public DieContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -1540,9 +1540,7 @@ public partial class RecycleParser : Parser {
 			EnterOuterAlt(_localctx, 1);
 			{
 			State = 352; Match(OPEN);
-			{
 			State = 353; @int();
-			}
 			State = 354; Match(CLOSE);
 			}
 		}
