@@ -79,7 +79,7 @@ public partial class RecycleParser : Parser {
 	private static readonly string[] _LiteralNames = {
 		null, "'''", "'game'", "'setup'", "'stage'", "'player'", "'team'", "'scoring'", 
 		"'min'", "'max'", "'end'", "'choice'", "'do'", "'any'", "'all'", "'let'", 
-		"'declare'", "'create'", "'players'", "'teams'", "'deck'", "'diestorage'", 
+		"'declare'", "'create'", "'players'", "'teams'", "'deck'", "'dicestorage'", 
 		"','", "'put'", "'points'", "'cycle'", "'next'", "'current'", "'previous'", 
 		"'set'", "'inc'", "'dec'", "'move'", "'remember'", "'forget'", "'shuffle'", 
 		"'turn'", "'pass'", "'repeat'", "'throwalldice'", "'saveturnstats'", "'roundnumber'", 

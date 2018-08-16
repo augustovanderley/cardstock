@@ -3,7 +3,7 @@
 	(setup
 		(create players 4)
 		(create teams (0) (1) (2) (3))
-		(create diestorage 'GAMEDICE (6) )
+		(create dicestorage 'GAMEDICE (6) )
 	)
 	(do (
 		(set (game sto ROUNDS) 0)
