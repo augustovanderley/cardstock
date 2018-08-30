@@ -7,22 +7,22 @@
 	)
 	(do (
 		(set (game sto ROUNDS) 0)
-		(set (game sto TURN) 1)
+		(set (game sto MOVE) 1)
 	))
 	(stage player
 		(end (== (game sto ROUNDS) 10))
 		(stage player
-			(end (== (game sto TURN) 5))
+			(end (== (game sto MOVE) 5))
 			(do (
 				(throwalldice 'GAMEDICE)
 				(inc ((current player) sto SCORE) (dievalue 'GAMEDICE)) 
-				(inc (game sto TURN) 1)
+				(inc (game sto MOVE) 1)
 			))
 		)
 
 
 		(do (
-		  (set (game sto TURN) 1)
+		  (set (game sto MOVE) 1)
 		  (inc (game sto ROUNDS) 1)
 		  (saveturnstats SCORE roundnumber ROUNDS)
 		  (cycle current previous)
