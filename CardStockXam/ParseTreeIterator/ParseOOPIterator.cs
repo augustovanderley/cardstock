@@ -1093,7 +1093,7 @@ namespace ParseTreeIterator
 			parent.instance.CurrentPlayer().idx = 0;
 			for (int i = 0; i < parent.instance.players.Count; ++i) {
 				var working = ProcessInt (scoreMethod.@int ());
-                parent.instance.WriteToFile("s:" + working + " " + i);
+                parent.instance.WriteToFile("s: score" + working + " player" + i);
 				ret.Add(new Tuple<int,int>(working,i));
 				parent.instance.CurrentPlayer ().Next();
 			}

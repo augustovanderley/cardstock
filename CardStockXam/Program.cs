@@ -18,7 +18,7 @@ namespace CardGames
             //CardStockXam.Scorer.Main(args);
             var p = new Program();
             
-            p.SingleGame("games/DiceGame.gdl");
+            p.SingleGame("games/ThrowDiceMatchCard.gdl");
             //p.AllGames();
 
 

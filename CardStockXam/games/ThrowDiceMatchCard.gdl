@@ -1,0 +1,70 @@
+;; Agram in the GDL
+(game
+   (declare 4 'NUMP)
+   (setup 
+      ;; Set up the players
+      (create players 'NUMP)
+      (create teams (0) (1) (2) (3))
+      
+      ;; Create the deck source
+     
+
+	  (repeat 5 (create deck (game iloc STOCK) (deck (VALUE (ONE, TWO, THREE, FOUR, FIVE)))))
+	  (create dicestorage 'GAMEDICE (5) )
+   )
+    (do (
+		(put points 'PRECEDENCE (
+                               ((VALUE (FIVE)) 5)
+                               ((VALUE (FOUR)) 4)
+                               ((VALUE (THREE)) 3)
+                               ((VALUE (TWO)) 2)
+							   ((VALUE (ONE)) 1)
+                               )
+        )
+        (shuffle (game iloc STOCK))
+        (all player 'P 
+           (repeat 5 (move (top (game iloc STOCK))
+                            (top ('P iloc HAND)))))
+		(set (game sto ROUNDS) 0)
+   
+    ))
+         
+      ;; players play a round 1 time     
+      (stage player
+         (end (all player 'P 
+                   (== (size ('P iloc HAND)) 0)))
+         (do (
+			(throwalldice 'GAMEDICE)
+		 ))
+         ;; players play a hand once
+         (stage player
+            (end (all player 'P 
+                      (> (size ('P vloc TRICK)) 0)))
+            
+			   (choice (
+					(do (
+						(any ((current player) iloc HAND) 'AC
+							(move 'AC (top ((current player) vloc TRICK))))
+					))
+			   ))
+			   
+			   (do (
+					((== (sum ((current player) vloc TRICK) using 'PRECEDENCE) (dievalue 'GAMEDICE))
+						(inc ((current player) sto SCORE) 1) 
+					)
+			   ))
+          )
+
+              
+         ;; after players play hand, computer wraps up trick
+         (do (               
+            (all player 'P 
+                 (move (top ('P vloc TRICK)) 
+                       (top (game vloc DISCARD))))
+			(cycle current previous)
+			(inc (game sto ROUNDS) 1)
+			(saveturnstats SCORE roundnumber ROUNDS)
+		))
+      )
+   (scoring max ((current player) sto SCORE))
+)

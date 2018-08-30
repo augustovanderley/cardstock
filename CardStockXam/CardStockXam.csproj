@@ -295,6 +295,9 @@
     <None Include="Antlr4\Runtime\Tree\Xpath\XPathLexer.g4" />
     <None Include="Antlr4\Runtime\Tree\Xpath\XPathLexer.tokens" />
     <None Include="app.config" />
+    <None Include="games\ThrowDiceMatchCard.gdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="games\DiceGame.gdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
