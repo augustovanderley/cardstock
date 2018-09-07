@@ -1,34 +1,35 @@
-;; A game of dices in the GDL
 (game
-	(setup
-		(create players 4)
-		(create teams (0) (1) (2) (3))
-		(create dicestorage 'GAMEDICE (6) )
-	)
-	(do (
-		(set (game sto ROUNDS) 0)
-		(set (game sto MOVE) 1)
-	))
-	(stage player
-		(end (== (game sto ROUNDS) 10))
-		(stage player
-			(end (== (game sto MOVE) 5))
-			(do (
-				(throwalldice 'GAMEDICE)
-				(inc ((current player) sto SCORE) (dievalue 'GAMEDICE)) 
-				(inc (game sto MOVE) 1)
-			))
-		)
-
-
-		(do (
-		  (set (game sto MOVE) 1)
-		  (inc (game sto ROUNDS) 1)
-		  (saveturnstats SCORE roundnumber ROUNDS)
-		  (cycle current previous)
-
-        ))
-	)
-
-	(scoring max ((current player) sto SCORE))
+ (setup
+  (create players 4)
+  (create teams (0) (1) (2) (3))
+  (create dicestorage 'GAMEDICE (50) )
+ )
+ (do 
+  (
+   (set (game sto ROUNDS) 0)
+   (set (game sto MOVE) 1)
+  )
+ )
+ (stage player
+  (end (== (game sto ROUNDS) 50))
+   (stage player
+    (end (== (game sto MOVE) 5))
+     (do 
+      (
+       (throwalldice 'GAMEDICE)
+       (inc ((current player) sto SCORE) (dievalue 'GAMEDICE)) 
+       (inc (game sto MOVE) 1)
+      )
+     )
+   )
+   (do 
+    (
+     (set (game sto MOVE) 1)
+     (inc (game sto ROUNDS) 1)
+     (saveturnstats SCORE roundnumber ROUNDS)
+     (cycle current previous)
+    )
+   )
+ )
+ (scoring max ((current player) sto SCORE))
 )
